@@ -22,15 +22,56 @@ public class Main {
 
             while (true) {
                 System.out.print("kaushik-8924 >");
-                switch (enter.next()) {
+                String input = enter.nextLine();
+                if ("exit".equalsIgnoreCase(input)) {
 
-                    case "exit":
-                        System.exit(0);
-                        break;
+                    System.exit(0);
 
-                    case "help":
-                        printHelpPage();
+                } else if ("help".equalsIgnoreCase(input)) {
 
+                    printHelpPage();
+
+                } else if ("host".equalsIgnoreCase(input)) {
+
+                    HostInfo.displayAllHosts(currentService);
+
+                } else if ("vm".equalsIgnoreCase(input)) {
+
+                    VMInfo.getAllVms(currentService);
+
+                } else if (input.trim().startsWith("host") || input.trim().startsWith("vm")) {
+
+                    String[] inputarray = input.trim().split(" ");
+                    if (inputarray.length == 3) {
+
+                        if (inputarray[0].equals("host")) {
+
+                            if (inputarray[2].equals("info")) {
+                                HostInfo.getHostInfo(currentService, inputarray[1]);
+                            }
+
+                            if (inputarray[2].equalsIgnoreCase("datastore")) {
+                                HostInfo.getHostDatastore(currentService, inputarray[1]);
+                            }
+
+                            if (inputarray[2].equalsIgnoreCase("network")) {
+                                HostInfo.getHostNetworkInfo(currentService, inputarray[1]);
+                            }
+                        }
+
+                        if (inputarray[0].equals("vm")) {
+
+                            if (inputarray[2].equals("info")) {
+                                VMInfo.getVMInfo(currentService, inputarray[1]);
+                            }
+                        }
+
+                    } else {
+                        System.out.println("Invalid command");
+                    }
+
+                } else {
+                    System.out.println("Invalid command");
                 }
             }
 
