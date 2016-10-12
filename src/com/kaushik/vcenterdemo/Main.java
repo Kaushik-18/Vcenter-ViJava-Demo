@@ -15,13 +15,13 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("CMPE 281 HW2 from Kaushik Shingne");
 
-        //Login to server and retrive service instance
+        //Login to server and retrieve service instance
         ServiceInstance currentService = loginToVcenter(args);
         if (currentService != null) {
             Scanner enter = new Scanner(System.in);
 
             while (true) {
-                System.out.print("kaushik-8924 >");
+                System.out.print("kaushik-924 >");
                 String input = enter.nextLine();
                 if ("exit".equalsIgnoreCase(input)) {
 
@@ -64,6 +64,19 @@ public class Main {
                             if (inputarray[2].equals("info")) {
                                 VMInfo.getVMInfo(currentService, inputarray[1]);
                             }
+
+                            if (inputarray[2].equals("on")) {
+                                VMInfo.toggleVMState(currentService, inputarray[1], true);
+                            }
+
+                            if (inputarray[2].equals("off")) {
+                                VMInfo.toggleVMState(currentService, inputarray[1], false);
+                            }
+
+                            if (inputarray[2].equals("shutdown")) {
+                                VMInfo.shutDownVM(currentService, inputarray[1]);
+                            }
+
                         }
 
                     } else {
